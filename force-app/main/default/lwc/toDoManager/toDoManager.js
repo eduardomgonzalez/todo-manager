@@ -5,8 +5,8 @@ import getCurrentTodos from "@salesforce/apex/ToDoController.getCurrentTodos";
 export default class ToDoManager extends LightningElement {
     @track time = "8:15 PM";
     @track greeting = "Good Evening";
-
     @track todos = [];
+    initialMessage = "¿Qué tienes pensado para hoy?"
 
     connectedCallback() {
         this.getTime();
@@ -42,11 +42,11 @@ export default class ToDoManager extends LightningElement {
 
     setGreeting(hour) {
         if(hour < 12) {
-            this.greeting = "Good Morging";
+            this.greeting = "Buenos días";
         } else if(hour >= 12 && hour < 17) {
-            this.greeting = "Good Afternoon";
+            this.greeting = "Buenas tardes";
         } else {
-            this.greeting = "Good Evening";
+            this.greeting = "Buenas noches";
         }
     }
 

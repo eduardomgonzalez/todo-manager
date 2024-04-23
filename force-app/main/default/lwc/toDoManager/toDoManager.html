@@ -29,11 +29,14 @@
 
          <lightning-layout-item size="12">
             <div>UPCOMING</div>
-            <template for:each={upcomingTasks} for:item="todo">
+            <template for:each={upcomingTasks} for:item="todo" >
+                <!-- "onupdate" y "ondelete" son de acuerdo a los eventos que disparo en el toDoItem -->
                 <c-to-do-item
                  key={todo.todoId}
                  todo-id={todo.todoId}
                  todo-name={todo.todoName}
+                 onupdate={updateTodoHandler} 
+                 ondelete={deleteTodoHandler}
                  ></c-to-do-item>
             </template>
 
@@ -44,6 +47,8 @@
                  todo-id={todo.todoId}
                  todo-name={todo.todoName}
                  done
+                 onupdate={updateTodoHandler}
+                 ondelete={deleteTodoHandler}
                  ></c-to-do-item>
             </template>
         </lightning-layout-item>

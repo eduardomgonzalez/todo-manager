@@ -10,7 +10,8 @@ export default class ToDoManager extends LightningElement {
 
     connectedCallback() {
         this.getTime();
-        this.populateTodos();
+        //this.populateTodos();
+        this.fetchTodos();
 
         setInterval(() => {
             this.getTime();
@@ -57,15 +58,51 @@ export default class ToDoManager extends LightningElement {
             done: false
         }
 
-        addTodo({payload: JSON.stringify(todo)}).
-        then(response => {
+        addTodo({payload: JSON.stringify(todo)})
+        .then(response => {
             console.log("Iten inserted successfully");
+            this.fetchTodos();
         }).catch(error => {
             console.log("Error in inserting todo item " + error);
         });
 
         //this.todos.push(todo);
         inputBox.value = "";
+    }
+
+    fetchTodos() {
+        getCurrentTodos()
+        .then(result => {
+            if(result) {
+                console.log("Retrieved todos from server ", result.length);
+                this.todos = result;
+            }
+        })
+        .catch(error => {
+            console.log("Error in fetching todos " + error);
+        });
+    }
+
+    /**
+     * Obtenga una lista nueva de todos una vez que se actualice todo
+     * Este método se llama en el evento update
+     * @param {*} event
+     */
+    updateTodoHandler(event) {
+        if(event) {
+            this.fetchTodos();
+        }
+    }
+
+    /**
+     * Obtenga una nueva lista de todos una vez que se elimine todo
+     * This method is called on delete event Este método se llama en el evento delete
+     * @param {*} event
+     */
+    deleteTodoHandler(event) {
+        if(event) {
+            this.fetchTodos();
+        }
     }
 
     get upcomingTasks(){
@@ -76,7 +113,7 @@ export default class ToDoManager extends LightningElement {
         return this.todos && this.todos.length ? this.todos.filter( todo => todo.done) : [];
     }
 
-    populateTodos() {
+    /* populateTodos() {
         const todos = [
             {
                 todoId: 0,
@@ -99,5 +136,5 @@ export default class ToDoManager extends LightningElement {
         ];
 
         this.todos = todos;
-    }
+    } */
 }

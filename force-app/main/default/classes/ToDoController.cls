@@ -1,6 +1,6 @@
 /**
  * ToDoManager class
- * Soporte para agregar/eliminar/actualizar/recuperar API
+ * Soporte para agregar/eliminar/actualizar/recuperar
  */
 public class ToDoController {
 

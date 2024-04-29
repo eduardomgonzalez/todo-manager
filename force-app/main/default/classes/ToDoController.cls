@@ -59,7 +59,7 @@ public class ToDoController {
     public static List<ToDo> getCurrentTodos() {
       List<SObject> todos = Database.query(
         /* 'SELECT Id, Name, CreatedDate, Done__c FROM ToDo__c WHERE CreatedDate = TODAY ORDER BY CreatedDate DESC' */
-        'SELECT Id, Name, CreatedDate, Done__c FROM ToDo__c BY CreatedDate DESC'
+        'SELECT Id, Name, CreatedDate, Done__c FROM ToDo__c ORDER BY CreatedDate DESC'
       );
       return getToDos(todos);
     }
